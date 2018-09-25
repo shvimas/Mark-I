@@ -1,0 +1,12 @@
+FROM my-alpine-python3:latest
+
+WORKDIR crawler
+
+COPY src src
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+ENV PYTHONPATH=$PYTHONPATH:/crawler/src
+
+CMD ["python", "src/poloniex/history/main.py"]

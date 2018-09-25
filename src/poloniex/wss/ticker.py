@@ -10,6 +10,8 @@ async def subscribe(websocket):
     response = await websocket.recv()
     if response == '[1002,1]':
         print(f'successfully subscribed to ticker channel ({__channel_id})')
+    else:
+        raise RuntimeError(f'unexpected response: {response}')
 
 
 async def unsubscribe(websocket):
@@ -19,15 +21,16 @@ async def unsubscribe(websocket):
 
 async def main():
     try:
+        info = {}
         async with websockets.connect(poloniex_wss_url) as ws:
             await subscribe(websocket=ws)
 
-            async for msg in ws:
-                print(f'<<< {msg}')
-    except:
+            async for response in ws:
+                ccy_pair, data = parse_ticker_response(response)
+                info[ccy_pair] = data
+    finally:
         await unsubscribe(websocket=ws)
 
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(main())
-    asyncio.get_event_loop().run_forever()
