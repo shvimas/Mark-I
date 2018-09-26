@@ -1,5 +1,4 @@
 import os
-import sched
 import time
 
 from poloniex.rest.ticker import get_ticks
@@ -38,16 +37,15 @@ def save_ticks():
             raise RuntimeWarning(f'exceeded disk space of {space_limit} bytes')
 
 
-def periodic(scheduler: sched.scheduler, delay: int, action):
-    scheduler.enter(delay=delay, priority=1, action=periodic, argument=(scheduler, delay, action))
-    action()
-    scheduler.run()
+def repeat(delay: int, action):
+    while True:
+        time.sleep(delay)
+        action()
 
 
 def main():
     init()
-    s = sched.scheduler()
-    periodic(scheduler=s, delay=60, action=save_ticks)
+    repeat(delay=60, action=save_ticks)
 
 
 if __name__ == '__main__':
