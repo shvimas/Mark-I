@@ -1,2 +1,6 @@
+ccxt
+numpy
+pandas
+pymongo
 requests
 websockets

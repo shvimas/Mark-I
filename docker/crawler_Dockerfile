@@ -6,4 +6,4 @@ COPY src src
 
 ENV PYTHONPATH=$PYTHONPATH:/crawler/src
 
-CMD ["python", "src/poloniex/history/main.py"]
+CMD ["python", "src/crawler/main.py", "poloniex"]
