@@ -46,7 +46,7 @@ def main():
     if exchange not in ccxt.exchanges:
         raise ValueError(f'{exchange} not found')
 
-    exchange = getattr(importlib.import_module(f'ccxt.{exchange}'), exchange)
+    exchange = getattr(importlib.import_module(f'ccxt.{exchange}'), exchange)()
     repeat(delay=60, action=lambda: get_market_data(exchange=exchange))
 
 
