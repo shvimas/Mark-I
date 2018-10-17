@@ -1,0 +1,8 @@
+FROM mongo:4.0.3
+
+COPY docker/crawler-mongo.conf /crawler_cfg/crawler-mongo.conf
+
+RUN ["mkdir", "/var/lib/mongodb"]
+RUN ["chmod", "777", "/var/lib/mongodb"]
+
+CMD ["mongod", "--config", "/crawler_cfg/crawler-mongo.conf"]
