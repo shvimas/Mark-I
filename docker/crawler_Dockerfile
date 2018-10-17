@@ -1,4 +1,4 @@
-FROM alpine-bit-crawler:latest
+FROM crawler-base:latest
 
 WORKDIR crawler
 

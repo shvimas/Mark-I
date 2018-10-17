@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-docker rm -f bit-crawler
-docker rmi bit-crawler
+docker rm -f crawler
+docker rmi crawler

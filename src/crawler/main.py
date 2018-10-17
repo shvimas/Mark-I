@@ -1,11 +1,15 @@
 import importlib
+import os
 import sys
 import time
+import urllib.parse
 
 import ccxt
 import pymongo
 
-CLIENT = pymongo.MongoClient(host='localhost', port=27017)
+_mongo_username = urllib.parse.quote_plus(os.environ['CRAWLER_MONGO_USERNAME'])
+_mongo_password = urllib.parse.quote_plus(os.environ['CRAWLER_MONGO_PASSWORD'])
+CLIENT = pymongo.MongoClient(host='mongo', port=27017, username=_mongo_username, password=_mongo_password)
 DB = CLIENT['spots']
 
 
