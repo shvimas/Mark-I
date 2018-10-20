@@ -3,5 +3,4 @@ __pycache__
 /.idea
 /envs/
 /plots/
-/src/private
 .ipynb_checkpoints/
